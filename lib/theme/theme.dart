@@ -6,7 +6,8 @@ final theme = ThemeData(
   appBarTheme: const AppBarTheme(
     elevation: 0,
     backgroundColor: const Color.fromARGB(255, 31, 31, 31),
-    titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700)
+    titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
+    iconTheme: IconThemeData(color: Colors.white),
     ),
   dividerColor: Colors.white24,
   useMaterial3: true,

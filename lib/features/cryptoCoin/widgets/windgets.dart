@@ -1,0 +1,1 @@
+export 'cryptoBaseCard.dart';

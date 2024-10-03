@@ -2,4 +2,5 @@ import 'package:flutter_application_1/repositories/cryptoCoins/models/models.dar
 
 abstract class AbstractCoinsRepository {
   Future<List<CryptoCoin>> getCoinsList();
+  Future<CryptoCoin> getCoinDetails(String currencyCode);
 }
