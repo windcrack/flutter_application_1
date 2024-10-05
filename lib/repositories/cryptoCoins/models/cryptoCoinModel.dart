@@ -7,7 +7,7 @@ class CryptoCoin extends Equatable{
   final double hight24hour;
   final double low24hour;
 
-  CryptoCoin({
+  const CryptoCoin({
     required this.name, 
     required this.priceInUSD, 
     required this.image, 

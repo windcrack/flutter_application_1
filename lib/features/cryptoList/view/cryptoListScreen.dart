@@ -37,7 +37,7 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => TalkerScreen(talker: GetIt.I<Talker>())));
             }, 
-            icon: Icon(Icons.document_scanner_outlined)
+            icon: const Icon(Icons.document_scanner_outlined)
           )
         ],
       ),
@@ -52,9 +52,9 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
           builder: (context, state) {
             if(state is CryptoListLoaded){
               return ListView.separated(
-                padding: EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(top: 16),
                 itemCount: state.coinsList.length,
-                separatorBuilder: (context, index) => Divider(),
+                separatorBuilder: (context, index) => const Divider(),
                 itemBuilder: (context, i) {
                   final coin = state.coinsList[i];
                   return CryptoCoinTile(coin: coin);
@@ -66,12 +66,12 @@ class _CryptoListScreenState extends State<CryptoListScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Что-то пошло не так.'),
-                  Text('Попробуйте позже'),
-                  SizedBox(height: 30),
+                  const Text('Что-то пошло не так.'),
+                  const Text('Попробуйте позже'),
+                  const SizedBox(height: 30),
                   TextButton(onPressed: () {
                     _cryptoListBlock.add(LoadCryptoList());
-                  }, child: Text('Попробовать снова')),
+                  }, child: const Text('Попробовать снова')),
                 ],
               ));
             }

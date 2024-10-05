@@ -21,7 +21,7 @@ void main() {
   final dio = Dio();
   Bloc.observer = TalkerBlocObserver(
     talker: talker,
-    settings: TalkerBlocLoggerSettings(
+    settings: const TalkerBlocLoggerSettings(
       printStateFullData: false,
       printEventFullData: false,
     )
@@ -30,7 +30,7 @@ void main() {
   dio.interceptors.add(
     TalkerDioLogger(
         talker: talker,
-        settings: TalkerDioLoggerSettings(
+        settings: const TalkerDioLoggerSettings(
           printResponseData: false,
         )
     ),

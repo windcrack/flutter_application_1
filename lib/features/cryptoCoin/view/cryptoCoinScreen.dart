@@ -68,12 +68,12 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
                   ),
                 ),
                 const SizedBox(height: 6),
-                Text('Цена на данный момент:'),
+                const Text('Цена на данный момент:'),
                 CrytptoBaseCard(
                   child: Center(
                     child: Text(
                       '${coinPrice.toStringAsFixed(2)} \$',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w700,
                       ),
@@ -82,7 +82,7 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
                   )
                 ),
                 const SizedBox(height: 12),
-                Text('Цена за 24:'),
+                const Text('Цена за 24 часа:'),
                 CrytptoBaseCard(
                     child: Column(
                       children: [

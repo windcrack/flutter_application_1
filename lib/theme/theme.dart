@@ -5,13 +5,13 @@ final theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
   appBarTheme: const AppBarTheme(
     elevation: 0,
-    backgroundColor: const Color.fromARGB(255, 31, 31, 31),
+    backgroundColor: Color.fromARGB(255, 31, 31, 31),
     titleTextStyle: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
     iconTheme: IconThemeData(color: Colors.white),
     ),
   dividerColor: Colors.white24,
   useMaterial3: true,
-  listTileTheme: ListTileThemeData(iconColor: Colors.white),
+  listTileTheme: const ListTileThemeData(iconColor: Colors.white),
   textTheme: const TextTheme(
     bodyMedium: TextStyle(
       color: Colors.white,
