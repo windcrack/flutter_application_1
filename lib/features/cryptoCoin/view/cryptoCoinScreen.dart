@@ -68,6 +68,7 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
                   ),
                 ),
                 const SizedBox(height: 6),
+                Text('Цена на данный момент:'),
                 CrytptoBaseCard(
                   child: Center(
                     child: Text(
@@ -80,6 +81,8 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
                     
                   )
                 ),
+                const SizedBox(height: 12),
+                Text('Цена за 24:'),
                 CrytptoBaseCard(
                     child: Column(
                       children: [
@@ -110,7 +113,7 @@ class DataRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(width: 200, child: Text(title)),
+        SizedBox(width: 100, child: Text(title)),
         const SizedBox(width: 32),
         Flexible(
           child: Text(value),
