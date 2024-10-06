@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/cryptoCoinsListApp.dart';
@@ -12,12 +13,20 @@ import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 import 'repositories/cryptoCoins/cryptoCoin.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
   final talker = TalkerFlutter.init();
   GetIt.I.registerSingleton(talker);
   GetIt.I<Talker>().debug('Talker started');
 
+  final app = await Firebase.initializeApp( 
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  talker.info(app.options.projectId);
   final dio = Dio();
   Bloc.observer = TalkerBlocObserver(
     talker: talker,
