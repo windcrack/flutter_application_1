@@ -10,7 +10,8 @@ import 'package:talker_flutter/talker_flutter.dart';
 import '../widgets/widgets.dart';
 
 class CryptoListScreen extends StatefulWidget {
-  const CryptoListScreen({super.key,});
+  const CryptoListScreen({super.key});
+  
 
   @override
   State<CryptoListScreen> createState() => _CryptoListScreenState();

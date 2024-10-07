@@ -1,21 +1,22 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_application_1/repositories/cryptoCoins/models/models.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+
+// part 'cryptoCoinModel.g.dart';
+
+@JsonSerializable()
 class CryptoCoin extends Equatable{
-  final String name;
-  final double priceInUSD;
-  final String image;
-  final double hight24hour;
-  final double low24hour;
-
   const CryptoCoin({
-    required this.name, 
-    required this.priceInUSD, 
-    required this.image, 
-    required this.hight24hour,
-    required this.low24hour,
+    required this.name,
+    required this.details,
   });
   
+  final String name;
+
+  final CryptoCoinModelDetails details;
+
   @override
   // TODO: implement props
-  List<Object?> get props => [name, priceInUSD, image, hight24hour];
+  List<Object?> get props => [name, details];
 }

@@ -46,10 +46,7 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
         builder: (context, state) {
           if(state is CryptoCoinLoaded){
             final coin = state.coin;
-            final coinImg = coin.image;
-            final coinPrice = coin.priceInUSD;
-            final hight24hour = coin.hight24hour;
-            final low24hour = coin.low24hour;
+            final coinDetails = coin.details;
             return Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,7 +54,7 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
                 SizedBox(
                   width: 50,
                   height: 50,
-                  child: Image.network(coinImg),
+                  child: Image.network(coinDetails.fullImageUrl),
                 ),
                 const SizedBox(height: 24),
                 Text(
@@ -72,7 +69,7 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
                 CrytptoBaseCard(
                   child: Center(
                     child: Text(
-                      '${coinPrice.toStringAsFixed(2)} \$',
+                      '${coinDetails.priceInUSD.toStringAsFixed(2)} \$',
                       style: const TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w700,
@@ -86,8 +83,8 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
                 CrytptoBaseCard(
                     child: Column(
                       children: [
-                        DataRow(title: 'Высокая', value: '${hight24hour.toStringAsFixed(2)} \$'),
-                        DataRow(title: 'Низкая', value: '${low24hour.toStringAsFixed(2)} \$'),
+                        DataRow(title: 'Высокая', value: '${coinDetails.hight24hour.toStringAsFixed(2)} \$'),
+                        DataRow(title: 'Низкая', value: '${coinDetails.low24hour.toStringAsFixed(2)} \$'),
                       ],
                   )
                 )
