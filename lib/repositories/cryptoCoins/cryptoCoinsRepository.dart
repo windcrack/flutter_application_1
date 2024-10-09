@@ -1,38 +1,66 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_application_1/repositories/cryptoCoins/cryptoCoin.dart';
+import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 
 const String url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,BNB,SOL,AID,CAG,DOV&tsyms=USD,JPY,EUR';
 class CryptoCoinsRepository implements AbstractCoinsRepository {
+  CryptoCoinsRepository({
+    required this.dio,
+    required this.cryptoCoinsBox,
+  });
 
   final Dio dio;
-
-  CryptoCoinsRepository({required this.dio});
+  final Box<CryptoCoin> cryptoCoinsBox;
 
   @override
   Future<List<CryptoCoin>> getCoinsList() async {
     var cryptoCoinsList = <CryptoCoin>[];
-    cryptoCoinsList = await fetchingApi();
+    try {
+      cryptoCoinsList = await _fectchCoinsListFromApi();
+      final cryptoCoinsMap = {for (var e in cryptoCoinsList) e.name: e};
+      cryptoCoinsBox.putAll(cryptoCoinsMap);
+    }  catch (e, st) {
+      GetIt.instance<Talker>().handle(e, st);
+      return cryptoCoinsBox.values.toList();
+    }
+
     return cryptoCoinsList;
   }
 
-
-  @override
-  Future<List<CryptoCoin>> fetchingApi() async {
-  final response = await dio.get(url);
-    final data =  response.data as Map<String, dynamic>;
-    final dataRaw = data['RAW'] as Map<String, dynamic>;
-    final cryptoCoinsList = dataRaw.entries.map((e){
-      final usdData = (e.value as Map<String, dynamic>)["USD"] as Map<String, dynamic>;
-      final details = CryptoCoinModelDetails.fromJson(usdData);
-      return CryptoCoin(
-        name: e.key, 
-        details: details,
-      );}).toList();
+  Future<List<CryptoCoin>> _fectchCoinsListFromApi() async {
+    final response = await dio.get(url);
+      final data =  response.data as Map<String, dynamic>;
+      final dataRaw = data['RAW'] as Map<String, dynamic>;
+      final cryptoCoinsList = dataRaw.entries.map((e){
+        final usdData = (e.value as Map<String, dynamic>)["USD"] as Map<String, dynamic>;
+        final details = CryptoCoinModelDetails.fromJson(usdData);
+        return CryptoCoin(
+          name: e.key, 
+          details: details,
+        );}).toList();
     return cryptoCoinsList;
   }
+
   @override
   Future<CryptoCoin> getCoinDetails(String currencyCode) async{
+    try {
+      final coin = await _fetchCoinDetailsFromApi(currencyCode);
+      // cryptoCoinsBox.put(currencyCode, coin);
+      return coin;
+    } catch (e, st) {
+      GetIt.instance<Talker>().handle(e, st);
+      return cryptoCoinsBox.get(currencyCode)!;
+    }
+
+    // final coin = await _fetchCoinDetailsFromApi(currencyCode);
+    // // cryptoCoinsBox.put(currencyCode, coin);
+    // return coin;
+  }
+
+  Future<CryptoCoin> _fetchCoinDetailsFromApi(String currencyCode) async {
     final response = await dio.get('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=$currencyCode&tsyms=USD');
     final data =  response.data as Map<String, dynamic>;
     final dataRaw = data['RAW'] as Map<String, dynamic>;
