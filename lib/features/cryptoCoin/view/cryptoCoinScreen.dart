@@ -1,13 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/cryptoCoin/bloc/crypto_coin_details/crypto_coin_details_bloc.dart';
 import 'package:flutter_application_1/features/cryptoCoin/widgets/cryptoBaseCard.dart';
+import 'package:flutter_application_1/repositories/cryptoCoins/cryptoCoin.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../repositories/cryptoCoins/abstractCoinsRepository.dart';
 
+@RoutePage()
 class CruptoCoinScreen extends StatefulWidget {
-  const CruptoCoinScreen({super.key});
+  const CruptoCoinScreen({super.key, required this.coin});
+
+  final CryptoCoin coin;
 
   @override
   State<CruptoCoinScreen> createState() => _CruptoCoinScreenState();
@@ -20,23 +25,22 @@ class _CruptoCoinScreenState extends State<CruptoCoinScreen> {
   final coinDetailBloc = CrytpoCoinBloc(GetIt.I<AbstractCoinsRepository>());
 
   @override
-  void didChangeDependencies() {
-    final args = ModalRoute.of(context)?.settings.arguments;
-    assert(args != null && args is String, 'You must provider String args');
-    // if(args == null){
-    //   print('You must provider args');
-    //   return;
-    // }
-    // if(args is! String){
-    //   print('You must provider String args');
-    //   return;
-    // }
-    coinName = args as String;
-    setState(() {
-      coinDetailBloc.add(LoadingCryptoCoin(currencyCode: coinName!));
-    });
-    super.didChangeDependencies();
+  void initState() {
+    coinDetailBloc.add(LoadingCryptoCoin(currencyCode: widget.coin.name));
+    super.initState();
   }
+
+  // @override
+  // void didChangeDependencies() {
+  //   final args = ModalRoute.of(context)?.settings.arguments;
+  //   assert(args != null && args is String, 'You must provider String args');
+  //   coinName = args as String;
+  //   setState(() {
+  //     coinDetailBloc.add(LoadingCryptoCoin(currencyCode: coinName!));
+  //   });
+  //   super.didChangeDependencies();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

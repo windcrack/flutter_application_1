@@ -66,15 +66,10 @@ import 'firebase_options.dart';
 // }
 
 void main() async {
-  // Сделать ошибки зоны фатальными для упрощения отладки
-  // BindingBase.debugZoneErrorsAreFatal = true;
 
-  // Убедитесь, что инициализация bindings происходит в самом начале
-  
-
-  // Если у вас есть асинхронные операции, оберните их в runZonedGuarded
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    
     // Инициализация Talker
     final talker = TalkerFlutter.init();
     GetIt.I.registerSingleton(talker);

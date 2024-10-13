@@ -42,19 +42,3 @@ class CryptoCoinAdapter extends TypeAdapter<CryptoCoin> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
-
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-CryptoCoin _$CryptoCoinFromJson(Map<String, dynamic> json) => CryptoCoin(
-      name: json['name'] as String,
-      details: CryptoCoinModelDetails.fromJson(
-          json['details'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$CryptoCoinToJson(CryptoCoin instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'details': instance.details,
-    };
